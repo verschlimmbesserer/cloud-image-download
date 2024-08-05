@@ -1,0 +1,14 @@
+---
+
+- name: Create /var/lib/libvirt/cloud-images
+  ansible.builtin.file:
+    path: /var/lib/libvirt/cloud-images
+    state: directory
+    owner: root
+    group: kvm
+    mode: "0755"
+
+- name: Download cloud images
+  ansible.builtin.import_tasks:
+    name: download.yml
+  when: cloud_images | lenght > 0
